@@ -13,7 +13,7 @@ async function authFoodPartnerMiddleware(req, res, next) {
         if (!foodPartner){
             return res.status(401).json({ message:"Please Login First!" })
         }
-        req.user = foodPartner;
+        req.foodPartner = foodPartner;
         next();
     } catch (error) {
         return res.status(401).json({ message:"Please Login First!" })
