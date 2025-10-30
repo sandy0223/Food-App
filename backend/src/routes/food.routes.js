@@ -5,16 +5,14 @@ const authMiddleware = require('../middlewares/auth.middleware');
 const multer = require('multer');
 
 const upload = multer({
-    storage: multer.diskStorage({
-        destination: function (req, file, cb) {
-            cb(null, 'uploads/');
-        },
-        filename: function (req, file, cb) {
-            cb(null, Date.now() + '-' + file.originalname);
-        }
-    }),
+    storage: multer.memoryStorage(),
 });
 
-Router.post('/', authMiddleware.authFoodPartnerMiddleware, upload.single('video'), foodController.createFood);
+
+Router.post('/',
+    authMiddleware.authFoodPartnerMiddleware,
+    upload.single('video'),
+    foodController.createFood
+);
 
 module.exports = Router;
